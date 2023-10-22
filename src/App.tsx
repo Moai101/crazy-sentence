@@ -64,7 +64,7 @@ return (
 
   
   >
-  <img src={value.imageUrl}  alt="logo" />
+  {/* <img src={value.imageUrl}  alt="logo" /> */}
 
 
   </div>
