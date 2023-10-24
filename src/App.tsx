@@ -15,6 +15,7 @@ function App() {
   const [englishSentence,setEnglishSentence] = useState<string[]>([])
   const [num,setNum] = useState<number>(0)
   const [row,setRow] = useState<number>(0)
+  const [totalNum,setTotalNum] = useState<number>(0)
 
 
   useEffect(()=>{
@@ -31,7 +32,7 @@ function App() {
 
 
 
-        axios.get("https://script.google.com/macros/s/AKfycbwKfkIkrUCtuHm_CuRFrNJYPqPiA3-zXfNTlbDY8m8YyKtd9jTYtPILeSPoRQSm5LWUWw/exec")
+        axios.get(REACT_APP_SCRIPT)
         .then(response => {
     
           const data = response.data
@@ -39,6 +40,7 @@ function App() {
           const japaneseSentence = data.japaneseSentence.split("\n")
           const englishSentence = data.englishSentence.split("\n")
           const rowNumber = data.rowNumber
+          setTotalNum(data.totalNum)
 
           setJapaneseArray([...japaneseSentence])
           setEnglishSentence([...englishSentence])
@@ -84,7 +86,8 @@ function App() {
 
       const result = await axios.post(REACT_APP_POST_SCRIPT,JSON.stringify(data))
 
-      if(result.data.status === "OK"){
+
+      if(result.status === 200){
   
         alert("更新が完了しました")
   
@@ -123,7 +126,12 @@ return (
 
 <li>
 
-<li>
+<li
+style={{
+  marginTop:20,
+  marginBottom:20
+}}
+>
     <input type={"checkbox"} value={-1} onChange={(e)=>{
       const value = Number(e.target.value)
       setNum(value)
@@ -133,6 +141,20 @@ return (
   </li>
 
   <button onClick={complete}>完了する</button>
+
+  <div
+  style={{
+    marginTop:20,
+    marginBottom:20
+  }}
+  
+  >
+
+  現在の進捗状況{row}/{totalNum}
+
+
+  </div>
+
 
 
 </li>
