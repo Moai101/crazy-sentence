@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import axios from 'axios';
 
@@ -9,6 +8,7 @@ const REACT_APP_POST_SCRIPT = process.env.REACT_APP_POST_SCRIPT
 
 
 function App() {
+
 
 
   const [japaneseArray,setJapaneseArray] = useState<string[]>([])
@@ -36,6 +36,7 @@ function App() {
         .then(response => {
     
           const data = response.data
+
           
           const japaneseSentence = data.japaneseSentence.split("\n")
           const englishSentence = data.englishSentence.split("\n")
